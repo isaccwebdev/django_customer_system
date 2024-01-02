@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-lg mt-5">
+  <h1 class="mb-4">REPORTE DE USUARIOS</h1>
+
+  <!-- Botón para crear un nuevo reporte de usuario -->
+  <div class="d-flex">
+    <div class="d-flex flex-column">
+      <a
+        href="{% url 'customer_create_view' %}"
+        class="btn btn-outline-primary my-1"
+        >Crear Usuario</a
+      >
+      <a href="#" class="btn btn-outline-success mb-4">Enviar</a>
+    </div>
+
+    <form method="get" class="d-flex align-items-center ms-auto">
+      {% csrf_token %}
+      <input
+        class="border py-2 mb-3 rounded"
+        type="text"
+        name="q"
+        placeholder="Buscar por nombre..."
+      />
+      <button class="btn btn-outline-primary mb-4" type="submit">
+        <i class="bi bi-search"></i>Buscar
+      </button>
+    </form>
+  </div>
+
+  <div class="full-height-container-list">
+    <ul class="list-group">
+      {% for user in users %}
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span>{{ user.name }}</span>
+
+        <!-- Opciones para cada usuario: Editar, Enviar, Eliminar -->
+        <div class="ms-auto">
+          <a href="{% url 'customer_update_view' user.id %}" class="btn btn-info btn-sm me-2">Editar</a>
+          <a href="{% url 'customer_delete_view' user.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+          
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

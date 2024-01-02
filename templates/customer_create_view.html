@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content%}
+<div class="container-lg">
+  <h1 class="mb-4">Añadir usuarios</h1>
+
+
+
+
+  <form action="/customer_create_view/" method="POST" class="border p-5 rounded">
+      {% csrf_token %}
+      {{ form.as_p }} <!-- Cambio para mostrar el formulario de forma más compacta -->
+      <button type="submit" class="btn btn-primary">Añadir</button>
+  </form>
+
+  
+  <a href="{% url 'customer_list' %}" class="btn btn-secondary mt-3">Volver a la lista de clientes</a>
+</div>
+
+{% endblock %}

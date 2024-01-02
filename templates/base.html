@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard con Bootstrap 5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Para diseño responsive -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+    />
+    
+    <style>
+      body,
+      html {
+        height: 100%;
+        font-family: "Arial", sans-serif;
+        background-color: #f8f9fa; /* Color de fondo suave */
+      }
+
+      .no-available {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 24px;
+      }
+
+      .navbar-dark {
+        background-color: #343a40; /* Color de fondo para Nav1 */
+      }
+
+      .nav-link {
+        color: #6c757d; /* Color de texto para los links */
+        transition: color 0.3s; /* Transición suave para el color */
+      }
+
+      .nav-link:hover {
+        color: #007bff; /* Color de texto cuando se pasa el mouse */
+      }
+
+      .nav2 {
+        background-color: #ffffff; /* Color de fondo para Nav2 */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+      }
+
+      .nav-link.active {
+        background-color: #f1f1f1; /* Color de fondo suave para el link activo en Nav2 */
+      }
+      .full-height-container {
+        height: 100vh; /* Oculta el 100% de la altura de la ventana */
+        overflow: hidden; /* Evita cualquier desbordamiento */
+    }
+    .full-height-container-list {
+        height: 45vh; /* Oculta el 100% de la altura de la ventana */
+        overflow: auto; /* Evita cualquier desbordamiento */
+    }
+    </style>
+  </head>
+
+  <body class="container-fluid full-height-container">
+    <div class="d-none d-md-block h-100">
+      <nav class="navbar mb-4">
+        <a class="navbar-brand" href="#">Dashboard</a>
+        <ul class="nav">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="/staff_sign_up" class="nav-link border rounded p-3 mx-2"><i class="bi bi-box-arrow-in-up"></i>Dar Alta</a>
+          </li>
+          <li class="nav-item">
+            <a href="/staff_sign_out" class="nav-link border rounded p-3"> <i class="bi bi-door-closed"></i>Cerrar Sesion</a>
+          </li>
+          {% else %}
+          
+          <li class="nav-item">
+            <a href="/staff_sign_in" class="nav-link"> <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesion</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-md-3 nav2 p-4">
+          <nav class="nav flex-column">
+            <a class="nav-link" href="/customer_list/">Reporte de usuario</a>
+          </nav>
+        </div>
+        {% endif %}
+        <div class="col-md-9 p-4">
+          {% block content %}
+          <!-- Contenido principal -->
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <div class="d-block d-md-none">
+      <div
+        class="no-available d-flex justify-content-center align-items-center h-100"
+      >
+        No disponible en tu dispositivo.
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

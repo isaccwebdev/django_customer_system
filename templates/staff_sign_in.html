@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-lg mt-5">
+    <h1 class="mb-4">Sign In</h1>
+
+    <!-- Mostrar errores si los hay -->
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- Formulario de inicio de sesión -->
+    <form action="/staff_sign_in/" method="POST" class="border p-4 rounded">
+        {% csrf_token %}
+        
+        <!-- Campos del formulario -->
+        {{ form.as_p }}
+        
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-lg mt-5">
+    <!-- Mostrar errores si existen -->
+    {% if error %}
+    <div class="alert alert-danger mb-4">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <h1 class="mb-4">Registrarse</h1>
+
+    <!-- Formulario de registro -->
+    <form action="/staff_sign_up/" method="POST" class="border p-4 rounded">
+        {% csrf_token %}
+        
+        <!-- Campos del formulario -->
+        {{ form.as_p }}
+        
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+    </form>
+</div>
+
+{% endblock %}
